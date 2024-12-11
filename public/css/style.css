@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    height : 5rem;
+}
+
+.fa-solid {
+    color: rgb(208, 42, 42);
+    font-size: 2.5rem;
+}
+
+.nav-link {
+    color: #222222 !important;
+    font-size: 1.2rem;
+    
+}
+
+footer {
+    text-align: center;
+    height: 8rem;
+    background: rgb(224, 223, 223);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 7px;
+}
+.company, .info-socials {
+    width: 100%;
+    font-size: 1.2rem;
+    margin-top: 5px;
+}
+.info-socials i{
+    font-size: 1.25rem;
+    margin-right: 1rem;
+}
+
+.info-links a {
+    font-size: 1.1rem;
+    width: 100%;
+    text-decoration: none;
+    color: black;
+}
+.info-links  :hover {
+    text-decoration: underline;
+}
+
+
+/* Cards */
+.card {
+    border: none;
+    margin: 1rem auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+.card-img-top {
+    width: 100%;
+    object-fit: cover;
+    height: 12rem;
+    border-radius: 1rem 1rem 0 0;
+}
+.card-body {
+    padding: 1rem;
+    text-align: center;
+}
+.card-text {
+    font-size: 1rem;
+    color: #555;
+}
+.card-text strong {
+    color: #000;
+}
+.row {
+    padding: 2rem;
+}
+
+/* add new.ejs */
+input, textarea {
+    border: 1px solid rgb(32, 31, 31) !important;
+}

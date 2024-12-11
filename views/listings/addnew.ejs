@@ -1,0 +1,43 @@
+<% layout("./layouts/boilerplate") %>
+<body>
+    <h2 class="mt-4 text-center">Add New Listing</h2>
+    <div class="card w-75 mx-auto p-4 shadow-lg">
+        <form method="POST" action="/listings" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="listing[title]" class="form-label"><b>Title</b></label>
+                <input type="text" id="listing[title]" name="listing[title]" required class="form-control" placeholder="Add a catchy title">
+                <div class="valid-feedback fs-5">Title Looks Good!</div>
+                <div class="invalid-feedback fs-5">Title is required</div>
+            </div>
+            <div class="mb-3">
+                <label for="listing[description]" class="form-label"><b>Description</b></label>
+                <textarea id="listing[description]" name="listing[description]" rows="4" placeholder="Enter a brief description" class="form-control" required></textarea>
+                <div class="valid-feedback">Title Looks Good!</div>
+                <div class="invalid-feedback fs-5">Description is required</div>
+            </div>
+            <div class="mb-3">
+                <label for="listing[image]" class="form-label"><b>Image URL</b></label>
+                <input type="url" id="listing[image]" name="listing[image]" placeholder="Enter an image URL" class="form-control" required>
+                <div class="invalid-feedback fs-5">Enter Image URL</div>
+            </div>
+            <div class="mb-3">
+                <label for="listing[price]" class="form-label"><b>Price</b></label>
+                <input type="number" id="listing[price]" name="listing[price]" min="0" required class="form-control">
+                <div class="invalid-feedback fs-5">Enter Valid Price</div>
+            </div>
+            <div class="mb-3">
+                <label for="listing[location]" class="form-label"><b>Location</b></label>
+                <input type="text" id="listing[location]" name="listing[location]" required class="form-control" placeholder="Enter nearest landmark">
+                <div class="invalid-feedback fs-5">Enter Location Name</div>
+            </div>
+            <div class="mb-3">
+                <label for="listing[country]" class="form-label"><b>Country</b></label>
+                <input type="text" id="country" name="listing[country]" required class="form-control" placeholder="Enter country">
+                <div class="invalid-feedback fs-5">Enter Country Name</div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-success mb-2">Add Listing</button>
+            </div>
+        </form>
+    </div>
+</body>
