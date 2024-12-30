@@ -1,22 +1,32 @@
 <% layout("./layouts/boilerplate") %>
 
-<body class="">
-    <h2 class="mb-4">Listing Details</h2>
-    <img class="w-50 border border-2 border-secondary rounded mb-2" src="<%= listdata.image %>" alt="">
-    <ul class="list-group mb-4">
-        <li class="list-group-item fs-4 mb-1"><strong>Title:</strong> <%= listdata.title %></li>
-        <li class="list-group-item fs-5 mb-1"><strong>Description:</strong> <%= listdata.description %></li>
-        <li class="list-group-item fs-5 mb-1"><strong>Price:</strong> &dollar; <%= listdata.price.toLocaleString("en-US") %></li>
-        <li class="list-group-item fs-5 mb-1"><strong>Location:</strong> <%= listdata.location %></li>
-        <li class="list-group-item fs-5 mb-1"><strong>Country:</strong> <%= listdata.country %></li>
-    </ul>
-    <div class="d-flex justify-content-start mb-4">
-        <form method="get" action="/listings/<%= listdata._id %>/edit" class="mr-2">
-            <button class="btn btn-primary">Edit</button>
-        </form>
-        &NonBreakingSpace; &NonBreakingSpace;
-        <form method="post" action="/listings/<%= listdata._id %>?_method=delete" class="ml-2">
-            <button class="btn btn-danger">Delete</button>
-        </form>
-    </div>
-</body>
+    <body class="">
+        <h2 class="mb-4">Listing Details</h2>
+        <img class="w-50 border border-2 border-secondary rounded mb-2" src="<%= listdata.image %>" alt="">
+        <ul class="list-group mb-4">
+            <li class="list-group-item fs-4 mb-1"><strong>Title:</strong>
+                <%= listdata.title %>
+            </li>
+            <li class="list-group-item fs-5 mb-1"><strong>Description:</strong>
+                <%= listdata.description %>
+            </li>
+            <li class="list-group-item fs-5 mb-1"><strong>Price:</strong> &dollar; <%=
+                    listdata.price.toLocaleString("en-US") %>
+            </li>
+            <li class="list-group-item fs-5 mb-1"><strong>Location:</strong>
+                <%= listdata.location %>
+            </li>
+            <li class="list-group-item fs-5 mb-1"><strong>Country:</strong>
+                <%= listdata.country %>
+            </li>
+        </ul>
+        <div class="d-flex justify-content-start mb-4">
+            <form method="get" action="/listings/<%= listdata._id %>/edit" class="mr-2">
+                <button class="btn btn-primary">Edit</button>
+            </form>
+            &NonBreakingSpace; &NonBreakingSpace;
+            <form method="post" action="/listings/<%= listdata._id %>?_method=delete" class="ml-2">
+                <button class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </body>

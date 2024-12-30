@@ -10,7 +10,7 @@ body {
 }
 
 .navbar {
-    height : 5rem;
+    height: 5rem;
 }
 
 .fa-solid {
@@ -21,7 +21,7 @@ body {
 .nav-link {
     color: #222222 !important;
     font-size: 1.2rem;
-    
+
 }
 
 footer {
@@ -34,12 +34,15 @@ footer {
     align-items: center;
     padding: 7px;
 }
-.company, .info-socials {
+
+.company,
+.info-socials {
     width: 100%;
     font-size: 1.2rem;
     margin-top: 5px;
 }
-.info-socials i{
+
+.info-socials i {
     font-size: 1.25rem;
     margin-right: 1rem;
 }
@@ -50,7 +53,8 @@ footer {
     text-decoration: none;
     color: black;
 }
-.info-links  :hover {
+
+.info-links :hover {
     text-decoration: underline;
 }
 
@@ -63,33 +67,40 @@ footer {
     border-radius: 1rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .card:hover {
     transform: translateY(-10px);
     box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
 }
+
 .card-img-top {
     width: 100%;
     object-fit: cover;
     height: 12rem;
     border-radius: 1rem 1rem 0 0;
 }
+
 .card-body {
     padding: 1rem;
     text-align: center;
 }
+
 .card-text {
     font-size: 1rem;
     color: #555;
 }
+
 .card-text strong {
     color: #000;
 }
+
 .row {
     padding: 2rem;
 }
 
 /* add new.ejs */
-input, textarea {
+input,
+textarea {
     border: 1px solid rgb(32, 31, 31) !important;
 }
 
@@ -104,18 +115,22 @@ input, textarea {
     margin: 20px auto;
     min-height: 100vh;
 }
+
 .error-code {
     font-size: 5rem;
     font-weight: bold;
 }
+
 .error-message {
     font-size: 2.5rem;
     margin: 20px 0;
 }
+
 .error-details {
     font-size: 1rem;
     color: #495057;
 }
+
 .error-link {
     display: inline-block;
     padding: 10px 20px;

@@ -1,44 +1,51 @@
 <% layout("./layouts/boilerplate") %>
-<body>
-    <h2 class="text-center mt-4">Edit Listing</h2>
-    <div class="card w-75 mx-auto p-4 shadow-lg">
-        <form method="post" action="/listings/<%= listdata._id %>?_method=PUT" class="needs-validation" novalidate>
-            <div class="mb-3">
-                <label for="listing[title]" class="form-label"><b>Title</b></label>
-                <input type="text" id="listing[title]" name="listing[title]" class="form-control" value="<%= listdata.title %>" required>
-            </div>
 
-            <div class="mb-3">
-                <label for="listing[description]" class="form-label"><b>Description</b></label>
-                <textarea id="listing[description]" name="listing[description]" class="form-control" rows="4" required><%= listdata.description %></textarea>
-            </div>
+    <body>
+        <h2 class="text-center mt-4">Edit Listing</h2>
+        <div class="card w-75 mx-auto p-4 shadow-lg">
+            <form method="post" action="/listings/<%= listdata._id %>?_method=PUT" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="listing[title]" class="form-label"><b>Title</b></label>
+                    <input type="text" id="listing[title]" name="listing[title]" class="form-control"
+                        value="<%= listdata.title %>" required>
+                </div>
 
-            <div class="mb-3">
-                <label for="listing[image]" class="form-label"><b>Image URL</b></label>
-                <input type="url" id="listing[image]" name="listing[image]" class="form-control" value="<%= listdata.image %>">
-            </div>
+                <div class="mb-3">
+                    <label for="listing[description]" class="form-label"><b>Description</b></label>
+                    <textarea id="listing[description]" name="listing[description]" class="form-control" rows="4"
+                        required><%= listdata.description %></textarea>
+                </div>
 
-            <div class="mb-3">
-                <label for="listing[price]" class="form-label"><b>Price</b></label>
-                <input type="number" id="listing[price]" name="listing[price]" class="form-control" min="0" value="<%= listdata.price %>" required>
-                <div class="invalid-feedback fs-5">Enter Valid Price</div>
-            </div>
-            
-            <div class="mb-3">
-                <label for="listing[location]" class="form-label"><b>Location</b></label>
-                <input type="text" id="listing[location]" name="listing[location]" class="form-control" value="<%= listdata.location %>" required>
-                <div class="invalid-feedback fs-5">Enter Location Name</div>
-            </div>
+                <div class="mb-3">
+                    <label for="listing[image]" class="form-label"><b>Image URL</b></label>
+                    <input type="url" id="listing[image]" name="listing[image]" class="form-control"
+                        value="<%= listdata.image %>">
+                </div>
 
-            <div class="mb-3">
-                <label for="listing[country]" class="form-label"><b>Country</b></label>
-                <input type="text" id="country" name="listing[country]" class="form-control" value="<%= listdata.country %>" required>
-                <div class="invalid-feedback fs-5">Enter Country Name</div>
-            </div>
+                <div class="mb-3">
+                    <label for="listing[price]" class="form-label"><b>Price</b></label>
+                    <input type="number" id="listing[price]" name="listing[price]" class="form-control" min="0"
+                        value="<%= listdata.price %>" required>
+                    <div class="invalid-feedback fs-5">Enter Valid Price</div>
+                </div>
 
-            <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-success mb-2">Update Listing</button>
-            </div>
-        </form>
-    </div>
-</body>
+                <div class="mb-3">
+                    <label for="listing[location]" class="form-label"><b>Location</b></label>
+                    <input type="text" id="listing[location]" name="listing[location]" class="form-control"
+                        value="<%= listdata.location %>" required>
+                    <div class="invalid-feedback fs-5">Enter Location Name</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="listing[country]" class="form-label"><b>Country</b></label>
+                    <input type="text" id="country" name="listing[country]" class="form-control"
+                        value="<%= listdata.country %>" required>
+                    <div class="invalid-feedback fs-5">Enter Country Name</div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-success mb-2">Update Listing</button>
+                </div>
+            </form>
+        </div>
+    </body>
