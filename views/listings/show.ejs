@@ -1,12 +1,9 @@
 <% layout("./layouts/boilerplate") %>
 
     <body class="">
-        <h2 class="mb-4">Listing Details</h2>
+        <h2 class="mb-4"><%= listdata.title %></h2>
         <img class="w-50 border border-2 border-secondary rounded mb-2" src="<%= listdata.image %>" alt="">
         <ul class="list-group mb-4">
-            <li class="list-group-item fs-4 mb-1"><strong>Title:</strong>
-                <%= listdata.title %>
-            </li>
             <li class="list-group-item fs-5 mb-1"><strong>Description:</strong>
                 <%= listdata.description %>
             </li>
@@ -29,4 +26,32 @@
                 <button class="btn btn-danger">Delete</button>
             </form>
         </div>
+        <div class="container mt-4 mb-4 p-4 border rounded shadow-sm">
+            <h4 class="text-center mb-4">Leave a Rating</h4>
+            <form action="/listings/<%= listdata._id %>/reviews" method="post" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="rating" class="form-label fw-bold">Rating :</label>
+                    <input 
+                        type="range" 
+                        min="1" 
+                        max="5" 
+                        name="review[rating]" 
+                        id="rating">
+                </div>
+                <div class="mb-3">
+                    <label for="comment" class="form-label fw-bold">Comment:</label>
+                    <textarea 
+                        name="review[comment]" 
+                        id="comment" 
+                        rows="5" 
+                        cols="15" 
+                        class="form-control" 
+                        placeholder="Write your review here..."
+                        required></textarea>
+                    <div class="invalid-feedback">Please write some comments</div>
+                </div>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>
+        
     </body>

@@ -7,7 +7,8 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utlis/wrapAsync");
 const ExpressError = require("./utlis/ExpressError");
-const { listSchema } = require("./listSchemaJoi");
+const { listSchema, reviewSchema } = require("./listSchemaJoi");
+const Review = require("./models/review.js");
 require("dotenv").config();
 
 main()
@@ -35,6 +36,15 @@ app.get("/", async (req, res) => {
 
 const validateListing = (req, res, next) => {
   const { error } = listSchema.validate(req.body);
+  if (error) {
+    let errMsg = error.details.map((el) => el.message).join(", ");
+    throw new ExpressError(errMsg, 400);
+  } else {
+    next();
+  }
+};
+const validateReview = (req, res, next) => {
+  const { error } = reviewSchema.validate(req.body);
   if (error) {
     let errMsg = error.details.map((el) => el.message).join(", ");
     throw new ExpressError(errMsg, 400);
@@ -109,6 +119,24 @@ app.delete("/listings/:id", async (req, res) => {
   await Listing.findByIdAndDelete(id);
   res.redirect("/listings");
 });
+
+// Reviews
+// post review
+app.post(
+  "/listings/:id/reviews",
+  validateReview,
+  wrapAsync(async (req, res) => {
+    let id = req.params.id;
+    let listing = await Listing.findById(id);
+    let review = new Review(req.body.review);
+    listing.reviews.push(review);
+    await review.save();
+    await listing.save();
+    console.log("Review Saved");
+    // res.send("Review saved");
+    res.redirect(`/listings/${id}`);
+  })
+);
 
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));
