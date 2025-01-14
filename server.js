@@ -43,6 +43,7 @@ const validateListing = (req, res, next) => {
     next();
   }
 };
+
 const validateReview = (req, res, next) => {
   const { error } = reviewSchema.validate(req.body);
   if (error) {
@@ -83,7 +84,7 @@ app.post(
 // show route to display a single listing information
 app.get("/listings/:id", async (req, res) => {
   let { id } = req.params;
-  let listdata = await Listing.findById(id);
+  let listdata = await Listing.findById(id).populate("reviews");
   res.render("listings/show.ejs", { listdata });
 });
 
@@ -134,6 +135,17 @@ app.post(
     await listing.save();
     console.log("Review Saved");
     // res.send("Review saved");
+    res.redirect(`/listings/${id}`);
+  })
+);
+
+// delete review
+app.delete(
+  "/listings/:id/reviews/:reviewId",
+  wrapAsync(async (req, res) => {
+    let { id, reviewId } = req.params;
+    await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    await Review.findByIdAndDelete(reviewId);
     res.redirect(`/listings/${id}`);
   })
 );
