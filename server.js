@@ -9,6 +9,8 @@ const ExpressError = require("./utlis/ExpressError");
 require("dotenv").config();
 const listingRouter = require("./API/listingRoute.js");
 const reviewRouter = require("./API/reviewRoute.js");
+const session = require("express-session");
+const flash = require("connect-flash");
 
 main()
   .then((res) => {
@@ -28,10 +30,34 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "public")));
 
+const sessionOptions = {
+  secret : process.env.SECRET,
+  resave : false,
+  saveUninitialized : true,
+  cookie : {
+    expires : Date.now() + 7 * 24 * 60 * 60 * 1000,
+    maxAge : 7 * 24 * 60 * 60 * 1000,
+    httpOnly : true
+  }
+};
+
+
+app.use(session(sessionOptions));
+app.use(flash());
+
 app.get("/", async (req, res) => {
   const allListings = await Listing.find({});
   res.render("listings/index.ejs", { allListings });
 });
+
+app.use((req, res, next) => {
+  const listingFlash = req.flash("listing")
+  res.locals.listing = listingFlash;
+  console.log(res.locals.listing);
+  const listingFlashErr = req.flash("listError");
+  res.locals.listErr = listingFlashErr;
+  next();
+})
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
