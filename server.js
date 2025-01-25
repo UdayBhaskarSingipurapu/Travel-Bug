@@ -1,77 +1,109 @@
-const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
-const path = require("path");
-const Listing = require("./models/listings.js");
-const methodOverride = require("method-override");
-const ejsMate = require("ejs-mate");
-const ExpressError = require("./utlis/ExpressError");
-require("dotenv").config();
-const listingRouter = require("./API/listingRoute.js");
-const reviewRouter = require("./API/reviewRoute.js");
-const session = require("express-session");
-const flash = require("connect-flash");
+const express = require("express");                     // Importing the Express framework for building the web app
+const app = express();                                  // Initializing the Express app
+const mongoose = require("mongoose");                   // Importing Mongoose for MongoDB object modeling
+const path = require("path");                           // Importing the Node.js path module for file/directory path handling
+const Listing = require("./models/listings.js");        // Importing the Listing model for MongoDB operations
+const methodOverride = require("method-override");      // Allows using HTTP verbs like PUT and DELETE in forms
+const ejsMate = require("ejs-mate");                    // Enables layout and partial support for EJS templates
+const ExpressError = require("./utlis/ExpressError");   // Custom error class for better error handling
+require("dotenv").config();                             // Loads environment variables from a `.env` file
+const listingRouter = require("./API/listingRoute.js"); // Router for handling listing-related routes
+const reviewRouter = require("./API/reviewRoute.js");   // Router for handling review-related routes
+const session = require("express-session");             // Middleware for managing session data
+const flash = require("connect-flash");                 // Middleware for flash messages
+const User = require("./models/user.js");               // Importing the User model for authentication
+const passport = require("passport");                   // Middleware for handling user authentication
+const LocalStrategy = require("passport-local");        // Passport strategy for local authentication
+const userRouter = require("./API/userRouter.js");      // Router for handling user-related routes
 
+// Connecting to MongoDB database
 main()
   .then((res) => {
-    console.log("connection successfull");
+    console.log("connection successful");               // Log success message when connection is established
   })
   .catch((err) => {
-    console.log(err);
+    console.log(err);                                   // Log error message if connection fails
   });
+
 async function main() {
-  await mongoose.connect(process.env.DB_URL);
+  await mongoose.connect(process.env.DB_URL);           // Connects to the MongoDB database using the URL from .env file
 }
 
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
-app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride("_method"));
-app.engine("ejs", ejsMate);
-app.use(express.static(path.join(__dirname, "public")));
+// Configuring EJS as the view engine
+app.set("view engine", "ejs");                          // Set the view engine to EJS
+app.set("views", path.join(__dirname, "views"));        // Set the directory for view templates
 
+// Middleware configurations
+app.use(express.urlencoded({ extended: true }));        // Parses URL-encoded form data
+app.use(methodOverride("_method"));                     // Allows overriding HTTP methods with a query parameter
+app.engine("ejs", ejsMate);                             // Set ejs-mate as the template engine
+app.use(express.static(path.join(__dirname, "public"))); // Serves static files from the 'public' directory
+
+// Session configuration
 const sessionOptions = {
-  secret : process.env.SECRET,
-  resave : false,
-  saveUninitialized : true,
-  cookie : {
-    expires : Date.now() + 7 * 24 * 60 * 60 * 1000,
-    maxAge : 7 * 24 * 60 * 60 * 1000,
-    httpOnly : true
-  }
+  secret: process.env.SECRET,                           // Secret used for signing the session ID cookie
+  resave: false,                                        // Prevents session from being saved on every request if unmodified
+  saveUninitialized: true,                              // Forces uninitialized sessions to be saved
+  cookie: {
+    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,      // Sets cookie expiration to 7 days
+    maxAge: 7 * 24 * 60 * 60 * 1000,                    // Sets max cookie age to 7 days
+    httpOnly: true,                                     // Ensures the cookie is accessible only by the web server
+  },
 };
 
+app.use(session(sessionOptions));                       // Adds session middleware
+app.use(flash());                                       // Enables flash messages
 
-app.use(session(sessionOptions));
-app.use(flash());
+// Passport configuration for user authentication
+app.use(passport.initialize());                         // Initializes Passport
+app.use(passport.session());                            // Enables persistent login sessions
+passport.use(new LocalStrategy(User.authenticate()));   // Configures the local strategy for Passport
 
+passport.serializeUser(User.serializeUser());           // Serializes user data into the session
+passport.deserializeUser(User.deserializeUser());       // Deserializes user data from the session
+
+// Route for the home page
 app.get("/", async (req, res) => {
-  const allListings = await Listing.find({});
-  res.render("listings/index.ejs", { allListings });
+  const allListings = await Listing.find({});           // Fetches all listings from the database
+  res.render("listings/index.ejs", { allListings });    // Renders the index page with all listings
 });
 
+// Flash message middleware
 app.use((req, res, next) => {
-  const listingFlash = req.flash("listing")
-  res.locals.listing = listingFlash;
-  console.log(res.locals.listing);
-  const listingFlashErr = req.flash("listError");
-  res.locals.listErr = listingFlashErr;
+  const success = req.flash("success");                 // Retrieves success flash messages
+  res.locals.success = success;                         // Makes success messages available in views
+  const error = req.flash("error");                     // Retrieves error flash messages
+  res.locals.error = error;                             // Makes error messages available in views
   next();
-})
+});
 
-app.use("/listings", listingRouter);
-app.use("/listings/:id/reviews", reviewRouter);
+// Route to create a demo user (for testing purposes)
+// app.get('/demouser', async (req, res) => {
+//   let fakeUser = {
+//     email: "fake@gmail.com",
+//     username: "fakeuser"
+//   };
+//   let registeredFakeUser = await User.register(fakeUser, "fakepassword"); // Registers a fake user
+//   res.send(registeredFakeUser); // Sends the registered user data as the response
+// });
 
+// Router configuration
+app.use("/listings", listingRouter);                    // Adds routes for listings
+app.use("/listings/:id/reviews", reviewRouter);         // Adds routes for reviews related to a specific listing
+app.use("/user", userRouter);                           // Adds routes for user-related actions
+
+// Catch-all route for undefined paths
 app.all("*", (req, res, next) => {
-  next(new ExpressError("Page Not Found", 404));
+  next(new ExpressError("Page Not Found", 404));        // Passes a 404 error to the error-handling middleware
 });
 
+// Error-handling middleware
 app.use((err, req, res, next) => {
-  const { message = "Something went wrong", statusCode = 500 } = err;
-  // res.status(statusCode).send(message);
-  res.render("error.ejs", { message, statusCode });
+  const { message = "Something went wrong", statusCode = 500 } = err; // Extracts error details
+  res.render("error.ejs", { message, statusCode });     // Renders an error page
 });
 
+// Start the server
 app.listen(5050, () => {
-  console.log("app listening on port 5050");
+  console.log("app listening on port 5050");            // Logs a message when the server starts
 });

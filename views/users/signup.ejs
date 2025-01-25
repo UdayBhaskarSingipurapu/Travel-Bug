@@ -1,0 +1,28 @@
+<% layout("./layouts/boilerplate") %>
+
+    <body>
+        <div class="card w-75 mx-auto p-4 shadow-lg">
+            <h3 class="text-center">Register</h3>
+            <form method="POST" action="/user/signup" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="username" class="form-label"><b>Username</b></label>
+                    <input type="text" id="username" name="username" required class="form-control">
+                    <div class="valid-feedback fs-5">Username Looks Good!</div>
+                    <div class="invalid-feedback fs-5">Username is required</div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label"><b>Email</b></label>
+                    <input type="email" id="email" name="email" required class="form-control">
+                    <!-- <div class="valid-feedback fs-5">Title Looks Good!</div>
+                    <div class="invalid-feedback fs-5">Title is required</div> -->
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label"><b>Password</b></label>
+                    <input type="password" id="password" name="password" required class="form-control">
+                    <!-- <div class="valid-feedback fs-5">Title Looks Good!</div>
+                    <div class="invalid-feedback fs-5">Title is required</div> -->
+                </div>
+                <button class="btn btn-success">SignUp</button>
+            </form>
+        </div>
+    </body>
