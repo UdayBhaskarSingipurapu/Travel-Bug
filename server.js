@@ -64,8 +64,9 @@ passport.deserializeUser(User.deserializeUser());       // Deserializes user dat
 
 // Route for the home page
 app.get("/", async (req, res) => {
-  const allListings = await Listing.find({});           // Fetches all listings from the database
-  res.render("listings/index.ejs", { allListings });    // Renders the index page with all listings
+  // const allListings = await Listing.find({});           // Fetches all listings from the database
+  // res.render("listings/index.ejs", { allListings });    // Renders the index page with all listings
+  res.send("Welcome");
 });
 
 // Flash message middleware
@@ -74,6 +75,8 @@ app.use((req, res, next) => {
   res.locals.success = success;                         // Makes success messages available in views
   const error = req.flash("error");                     // Retrieves error flash messages
   res.locals.error = error;                             // Makes error messages available in views
+  const currUser = req.user;
+  res.locals.currUser = currUser;
   next();
 });
 
