@@ -6,6 +6,9 @@
         </h2>
         <img class="w-50 border border-2 border-secondary rounded mb-2" src="<%= listdata.image %>" alt="">
         <ul class="list-group mb-4">
+            <li class="list-group-item fs-5 mb-1"><strong>Owned By:</strong>
+                <%= listdata.owner.username %>
+            </li>
             <li class="list-group-item fs-5 mb-1"><strong>Description:</strong>
                 <%= listdata.description %>
             </li>
@@ -19,17 +22,22 @@
                 <%= listdata.country %>
             </li>
         </ul>
-        <div class="d-flex justify-content-start mb-4">
-            <form method="get" action="/listings/<%= listdata._id %>/edit" class="mr-2">
-                <button class="btn btn-primary">Edit</button>
-            </form>
-            &NonBreakingSpace; &NonBreakingSpace;
-            <form method="post" action="/listings/<%= listdata._id %>?_method=delete" class="ml-2">
-                <button class="btn btn-danger">Delete</button>
-            </form>
-        </div>
+
+        <% if(currUser && currUser._id.equals(listdata.owner._id)) { %>
+            <div class="d-flex justify-content-start mb-4">
+                <form method="get" action="/listings/<%= listdata._id %>/edit" class="mr-2">
+                    <button class="btn btn-primary">Edit</button>
+                </form>
+                &NonBreakingSpace; &NonBreakingSpace;
+                <form method="post" action="/listings/<%= listdata._id %>?_method=delete" class="ml-2">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        <% } %>
+        
+        <% if(currUser) { %>
         <div class="container mt-4 mb-4 p-4 border rounded shadow-sm">
-            <h4 class="text-center mb-4">Leave a Rating</h4>
+            <h4 class="text-center mb-4">Leave a Review</h4>
             <form action="/listings/<%= listdata._id %>/reviews" method="post" class="needs-validation" novalidate>
                 <div class="mb-3">
                     <label for="rating" class="form-label fw-bold">Rating :</label>
@@ -43,6 +51,7 @@
                 </div>
                 <button type="submit" class="btn btn-success">Submit</button>
             </form>
+            <% } %>
             <hr>
             <h3 class="text-center my-4">All Reviews</h3>
             <div class="container">
@@ -51,6 +60,10 @@
                         <div class="col-md-6 mb-4">
                             <div class="card h-100 shadow-sm border border-2">
                                 <div class="card-body text-start">
+                                    <p class="card-text fs-4">
+                                        <strong>@</strong>
+                                        <%= review.author.username %>
+                                    </p>
                                     <p class="card-text fs-4">
                                         <strong>Comment:</strong>
                                         <%= review.comment %>
@@ -62,11 +75,13 @@
                                         </span>
                                     </p>
                                 </div>
-                                <form method="post"
-                                    action="/listings/<%= listdata._id %>/reviews/<%= review._id%>?_method=DELETE"
-                                    class="p-2">
-                                    <button class="btn btn-primary ">Delete</button>
-                                </form>
+                                <% if(currUser && currUser._id.equals(review.author._id)) { %>
+                                    <form method="post"
+                                        action="/listings/<%= listdata._id %>/reviews/<%= review._id%>?_method=DELETE"
+                                        class="p-2">
+                                        <button class="btn btn-primary ">Delete</button>
+                                    </form>
+                                <% } %>
                             </div>
                         </div>
                         <% } %>
