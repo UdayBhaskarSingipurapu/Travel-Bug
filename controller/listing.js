@@ -1,4 +1,6 @@
 const Listing = require("../models/listings");
+const {listSchema} = require("../listSchemaJoi");
+const ExpressError = require("../utlis/ExpressError");
 
 module.exports.index = async (req, res) => {
   const allListings = await Listing.find({});
@@ -10,15 +12,23 @@ module.exports.newListingForm = (req, res) => {
 };
 
 module.exports.postNewListing = async (req, res, next) => {
-  // let {title, description, image, price, location, country} = req.body;
-  // let list = req.body.listing;
-  // const newListing = new Listing(list);
-  // console.log(newListing);
-  // if(!req.body.listing) throw new ExpressError('Add relevant details', 400);
+  let url = req.file.path 
+  let filename = req.file.filename 
+
+  // Add image to request body before validation
+  req.body.listing.image = { url, filename };
+
+  // Validate after adding image
+  const { error } = listSchema.validate(req.body, { abortEarly: false });
+  if (error) {
+    return next(new ExpressError(error.details.map((err) => err.message).join(","), 400));
+  }
+
+  // Proceed with listing creation
   const newListing = new Listing(req.body.listing);
   newListing.owner = req.user._id;
   await newListing.save();
-  req.flash("listing", "Listing Created Successfully");
+  req.flash("success", "Listing Created Successfully");
   res.redirect("/listings");
 };
 

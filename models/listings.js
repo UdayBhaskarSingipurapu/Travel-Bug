@@ -27,9 +27,8 @@ const listingSchema = new Schema({
     type: String,
   },
   image: {
-    type: String,
-    default: getDefaultHotelImage(),
-    set: (v) => (v == "" ? getDefaultHotelImage() : v), // Set a default hotel image if none is provided
+    url : String,
+    filename : String,
   },
   price: {
     type: Number,

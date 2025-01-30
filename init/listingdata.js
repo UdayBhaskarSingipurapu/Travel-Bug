@@ -5,8 +5,10 @@ const sampleData = [
     price: 500,
     location: "Malibu",
     country: "USA",
-    image:
-      "https://slovenia-prestige.com/wp-content/uploads/2016/03/Sample-Hotel-presentation-Photo-Gallery-3-750x400.jpg",
+    image:{
+      url : "https://slovenia-prestige.com/wp-content/uploads/2016/03/Sample-Hotel-presentation-Photo-Gallery-3-750x400.jpg",
+      filename : "listingimage"
+    }
   },
   {
     title: "Mountain Retreat",
@@ -14,8 +16,10 @@ const sampleData = [
     price: 300,
     location: "Aspen",
     country: "USA",
-    image:
-      "https://ieltsninja.com/content/wp-content/uploads/2021/01/Describe-a-Special-Hotel-You-Stayed-In.jpg",
+    image:{
+      url : "https://ieltsninja.com/content/wp-content/uploads/2021/01/Describe-a-Special-Hotel-You-Stayed-In.jpg",
+      filename : "listingimage"
+    }
   },
   {
     title: "Beachside Resort",
@@ -23,8 +27,10 @@ const sampleData = [
     price: 250,
     location: "Bahamas",
     country: "Bahamas",
-    image:
-      "https://news.airbnb.com/wp-content/uploads/sites/4/2018/02/c8d58f6f-4388-4a75-978d-1afa90c301f4.jpg",
+    image:{
+      url : "https://news.airbnb.com/wp-content/uploads/sites/4/2018/02/c8d58f6f-4388-4a75-978d-1afa90c301f4.jpg",
+      filename : "listingimage"
+    }
   },
   {
     title: "City Center Suite",
@@ -32,8 +38,10 @@ const sampleData = [
     price: 400,
     location: "New York",
     country: "USA",
-    image:
-      "https://a0.muscache.com/im/pictures/d6ce61b5-87e5-4f45-b54d-42f2f7ef9a55.jpg",
+    image:{
+      url : "https://a0.muscache.com/im/pictures/d6ce61b5-87e5-4f45-b54d-42f2f7ef9a55.jpg",
+      filename : "listingimage"
+    }
   },
   {
     title: "Romantic Getaway",
@@ -41,8 +49,10 @@ const sampleData = [
     price: 350,
     location: "Paris",
     country: "France",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1IFCTl8-24lCYlJHqXeuzYgjRCwY25dY_MQ&s",
+    image:{
+      url : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1IFCTl8-24lCYlJHqXeuzYgjRCwY25dY_MQ&s",
+      filename : "listingimage"
+    }
   },
   {
     title: "Penthouse Suite",
@@ -50,8 +60,10 @@ const sampleData = [
     price: 1000,
     location: "Dubai",
     country: "UAE",
-    image:
-      "https://slovenia-prestige.com/wp-content/uploads/2016/03/Sample-Hotel-presentation-Photo-Gallery-3-750x400.jpg",
+    image:{
+      url : "https://slovenia-prestige.com/wp-content/uploads/2016/03/Sample-Hotel-presentation-Photo-Gallery-3-750x400.jpg",
+      filename : "listingimage"
+    }
   },
   {
     title: "Countryside Inn",
@@ -59,8 +71,11 @@ const sampleData = [
     price: 200,
     location: "Kentucky",
     country: "USA",
-    image:
-      "https://ieltsninja.com/content/wp-content/uploads/2021/01/Describe-a-Special-Hotel-You-Stayed-In.jpg",
+    image:{
+      url : "https://ieltsninja.com/content/wp-content/uploads/2021/01/Describe-a-Special-Hotel-You-Stayed-In.jpg",
+      filename : "listingimage"
+    }
+    
   },
   {
     title: "Ski Resort Chalet",
@@ -68,8 +83,10 @@ const sampleData = [
     price: 600,
     location: "Swiss Alps",
     country: "Switzerland",
-    image:
-      "https://news.airbnb.com/wp-content/uploads/sites/4/2018/02/c8d58f6f-4388-4a75-978d-1afa90c301f4.jpg",
+    image:{
+      url : "https://news.airbnb.com/wp-content/uploads/sites/4/2018/02/c8d58f6f-4388-4a75-978d-1afa90c301f4.jpg",
+      filename : "listingimage"
+    }
   },
   {
     title: "Eco-Friendly Lodge",
@@ -77,18 +94,22 @@ const sampleData = [
     price: 280,
     location: "Costa Rica",
     country: "Costa Rica",
-    image:
-      "https://a0.muscache.com/im/pictures/d6ce61b5-87e5-4f45-b54d-42f2f7ef9a55.jpg",
+    image:{
+      url : "https://a0.muscache.com/im/pictures/d6ce61b5-87e5-4f45-b54d-42f2f7ef9a55.jpg",
+      filename : "listingimage"
+    }
   },
   {
     title: "Historic Mansion",
     description:
-      "A historic mansion offering old-world charm and modern luxury.",
+    "A historic mansion offering old-world charm and modern luxury.",
     price: 450,
     location: "New Orleans",
     country: "USA",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1IFCTl8-24lCYlJHqXeuzYgjRCwY25dY_MQ&s",
+    image:{
+      url : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1IFCTl8-24lCYlJHqXeuzYgjRCwY25dY_MQ&s",
+      filename : "listingimage"
+    }
   },
   {
     title: "Luxury Desert Camp",
@@ -96,8 +117,10 @@ const sampleData = [
     price: 700,
     location: "Sahara Desert",
     country: "Morocco",
-    image:
-      "https://slovenia-prestige.com/wp-content/uploads/2016/03/Sample-Hotel-presentation-Photo-Gallery-3-750x400.jpg",
+    image:{
+      url : "https://slovenia-prestige.com/wp-content/uploads/2016/03/Sample-Hotel-presentation-Photo-Gallery-3-750x400.jpg",
+      filename : "listingimage"
+    }
   },
   {
     title: "Coastal Villa",
@@ -105,38 +128,46 @@ const sampleData = [
     price: 550,
     location: "Santorini",
     country: "Greece",
-    image:
-      "https://ieltsninja.com/content/wp-content/uploads/2021/01/Describe-a-Special-Hotel-You-Stayed-In.jpg",
+    image:{
+      url : "https://ieltsninja.com/content/wp-content/uploads/2021/01/Describe-a-Special-Hotel-You-Stayed-In.jpg",
+      filename : "listingimage"
+    }
   },
   {
     title: "Vineyard Estate",
     description:
-      "Stay in a luxury vineyard estate and enjoy wine-tasting tours.",
+    "Stay in a luxury vineyard estate and enjoy wine-tasting tours.",
     price: 600,
     location: "Napa Valley",
     country: "USA",
-    image:
-      "https://news.airbnb.com/wp-content/uploads/sites/4/2018/02/c8d58f6f-4388-4a75-978d-1afa90c301f4.jpg",
+    image:{
+      url : "https://news.airbnb.com/wp-content/uploads/sites/4/2018/02/c8d58f6f-4388-4a75-978d-1afa90c301f4.jpg",
+      filename : "listingimage"
+    }
   },
   {
     title: "All-Inclusive Resort",
     description:
-      "An all-inclusive resort with world-class amenities and dining.",
+    "An all-inclusive resort with world-class amenities and dining.",
     price: 800,
     location: "Jamaica",
     country: "Jamaica",
-    image:
-      "https://a0.muscache.com/im/pictures/d6ce61b5-87e5-4f45-b54d-42f2f7ef9a55.jpg",
+    image:{
+      url : "https://a0.muscache.com/im/pictures/d6ce61b5-87e5-4f45-b54d-42f2f7ef9a55.jpg",
+      filename : "listingimage"
+    }
   },
   {
     title: "Business Hotel",
     description:
-      "A modern hotel with all the amenities for business travelers.",
+    "A modern hotel with all the amenities for business travelers.",
     price: 220,
     location: "Berlin",
     country: "Germany",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1IFCTl8-24lCYlJHqXeuzYgjRCwY25dY_MQ&s",
+    image:{
+      url : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1IFCTl8-24lCYlJHqXeuzYgjRCwY25dY_MQ&s",
+      filename : "listingimage"
+    }
   },
   {
     title: "Luxury Spa Retreat",
@@ -144,8 +175,10 @@ const sampleData = [
     price: 650,
     location: "Bali",
     country: "Indonesia",
-    image:
-      "https://slovenia-prestige.com/wp-content/uploads/2016/03/Sample-Hotel-presentation-Photo-Gallery-3-750x400.jpg",
+    image:{
+      url : "https://slovenia-prestige.com/wp-content/uploads/2016/03/Sample-Hotel-presentation-Photo-Gallery-3-750x400.jpg",
+      filename : "listingimage"
+    }
   },
   {
     title: "Private Island Resort",
@@ -153,8 +186,10 @@ const sampleData = [
     price: 1500,
     location: "Maldives",
     country: "Maldives",
-    image:
-      "https://ieltsninja.com/content/wp-content/uploads/2021/01/Describe-a-Special-Hotel-You-Stayed-In.jpg",
+    image:{
+      url : "https://ieltsninja.com/content/wp-content/uploads/2021/01/Describe-a-Special-Hotel-You-Stayed-In.jpg",
+      filename : "listingimage"
+    }
   },
   {
     title: "Lakeview Lodge",
@@ -162,28 +197,34 @@ const sampleData = [
     price: 350,
     location: "Lake Tahoe",
     country: "USA",
-    image:
-      "https://news.airbnb.com/wp-content/uploads/sites/4/2018/02/c8d58f6f-4388-4a75-978d-1afa90c301f4.jpg",
+    image:{
+      url : "https://news.airbnb.com/wp-content/uploads/sites/4/2018/02/c8d58f6f-4388-4a75-978d-1afa90c301f4.jpg",
+      filename : "listingimage"
+    }
   },
   {
     title: "Mountain Lodge",
     description:
-      "A charming lodge nestled in the mountains for a peaceful escape.",
+    "A charming lodge nestled in the mountains for a peaceful escape.",
     price: 450,
     location: "Colorado",
     country: "USA",
-    image:
-      "https://a0.muscache.com/im/pictures/d6ce61b5-87e5-4f45-b54d-42f2f7ef9a55.jpg",
+    image:{
+      url : "https://a0.muscache.com/im/pictures/d6ce61b5-87e5-4f45-b54d-42f2f7ef9a55.jpg",
+      filename : "listingimage"
+    }
   },
   {
     title: "Oceanfront Condo",
     description:
-      "An oceanfront condo with stunning views and easy beach access.",
+    "An oceanfront condo with stunning views and easy beach access.",
     price: 400,
     location: "Miami",
     country: "USA",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1IFCTl8-24lCYlJHqXeuzYgjRCwY25dY_MQ&s",
+    image:{
+      url : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1IFCTl8-24lCYlJHqXeuzYgjRCwY25dY_MQ&s",
+      filename : "listingimage"
+    }
   },
 ];
 

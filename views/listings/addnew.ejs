@@ -2,7 +2,7 @@
 
     <h2 class="mt-4 text-center">Add New Listing</h2>
     <div class="card w-75 mx-auto p-4 shadow-lg">
-        <form method="POST" action="/listings" class="needs-validation" novalidate>
+        <form method="POST" action="/listings" class="needs-validation" novalidate enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="listing[title]" class="form-label"><b>Title</b></label>
                 <input type="text" id="listing[title]" name="listing[title]" required class="form-control"
@@ -18,8 +18,8 @@
                 <div class="invalid-feedback fs-5">Description is required</div>
             </div>
             <div class="mb-3">
-                <label for="listing[image]" class="form-label"><b>Image URL</b></label>
-                <input type="url" id="listing[image]" name="listing[image]" placeholder="Enter an image URL"
+                <label for="listing[image]" class="form-label"><b>Upload Image</b></label>
+                <input type="file" id="listing[image]" name="listing[image]"
                     class="form-control" required>
                 <div class="invalid-feedback fs-5">Enter Image URL</div>
             </div>

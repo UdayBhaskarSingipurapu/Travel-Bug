@@ -3,6 +3,9 @@ const router = express.Router({ mergeParams: true });
 const wrapAsync = require("../utlis/wrapAsync");
 const Listing = require("../models/listings");
 const { isLoggedIn, isOwner, validateListing } = require("../middlewares");
+const multer  = require('multer')
+const {storage} = require("../cloudConfig.js");
+const upload = multer({ storage })
 const {
   index,
   newListingForm,
@@ -21,7 +24,13 @@ router.get("/", wrapAsync(index));
 router.get("/add", isLoggedIn, newListingForm);
 
 // post details to db
-router.post("/", isLoggedIn, validateListing, wrapAsync(postNewListing));
+router.post(
+  "/",
+  isLoggedIn,
+  upload.single("listing[image]"),
+  wrapAsync(postNewListing)
+);
+
 
 // show route to display a single listing information
 router.get("/:id", showListing);
