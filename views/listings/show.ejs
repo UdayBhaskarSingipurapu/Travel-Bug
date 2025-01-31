@@ -34,6 +34,8 @@
                 </form>
             </div>
         <% } %>
+
+        <!-- <div id="map" style="width: 100%; height: 400px;"></div> -->
         
         <% if(currUser) { %>
         <div class="container mt-4 mb-4 p-4 border rounded shadow-sm">
@@ -83,12 +85,7 @@
                                         <%= review.comment %>
                                     </p>
                                     <p class="card-text fs-4">
-                                        <strong>Rating:</strong>
-                                        <span class="badge bg-primary">
-                                            <%= review.rating %>
-                                        </span>
                                         <p class="starability-result" data-rating=<%= review.rating %>>
-                                            
                                         </p>
                                     </p>
                                 </div>
@@ -107,3 +104,5 @@
         </div>
 
     </body>
+
+    

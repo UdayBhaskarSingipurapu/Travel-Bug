@@ -44,7 +44,8 @@ router.put(
   "/:id",
   isLoggedIn,
   isOwner,
-  validateListing,
+  upload.single("listing[image]"),
+  // validateListing,
   wrapAsync(postEditedListing)
 );
 
