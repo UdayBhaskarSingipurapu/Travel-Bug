@@ -15,6 +15,14 @@ const User = require("./models/user.js");               // Importing the User mo
 const passport = require("passport");                   // Middleware for handling user authentication
 const LocalStrategy = require("passport-local");        // Passport strategy for local authentication
 const userRouter = require("./API/userRouter.js");      // Router for handling user-related routes
+const MongoStore = require('connect-mongo');
+const cors = require('cors');
+
+app.use(cors({
+  origin: "*",                   // Allow requests from any origin
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],  // Allowed methods
+  allowedHeaders: "Content-Type, Authorization, X-Requested-With"
+}));
 
 // Connecting to MongoDB database
 main()
@@ -40,18 +48,22 @@ app.engine("ejs", ejsMate);                             // Set ejs-mate as the t
 app.use(express.static(path.join(__dirname, "public"))); // Serves static files from the 'public' directory
 
 // Session configuration
-const sessionOptions = {
-  secret: process.env.SECRET,                           // Secret used for signing the session ID cookie
-  resave: false,                                        // Prevents session from being saved on every request if unmodified
-  saveUninitialized: true,                              // Forces uninitialized sessions to be saved
+app.use(session({
+  secret: process.env.SECRET, 
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+      mongoUrl: process.env.DB_URL,
+      collectionName: "sessions",
+      ttl: 7 * 24 * 60 * 60,
+  }),
   cookie: {
-    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,      // Sets cookie expiration to 7 days
-    maxAge: 7 * 24 * 60 * 60 * 1000,                    // Sets max cookie age to 7 days
-    httpOnly: true,                                     // Ensures the cookie is accessible only by the web server
-  },
-};
+      maxAge: 7 * 24 * 60 * 60 * 1000,  
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production" 
+  }
+}));
 
-app.use(session(sessionOptions));                       // Adds session middleware
 app.use(flash());                                       // Enables flash messages
 
 // Passport configuration for user authentication
@@ -66,7 +78,7 @@ passport.deserializeUser(User.deserializeUser());       // Deserializes user dat
 app.get("/", async (req, res) => {
   // const allListings = await Listing.find({});           // Fetches all listings from the database
   // res.render("listings/index.ejs", { allListings });    // Renders the index page with all listings
-  res.send("Welcome");
+  res.redirect("/listings");
 });
 
 // Flash message middleware
@@ -80,15 +92,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Route to create a demo user (for testing purposes)
-// app.get('/demouser', async (req, res) => {
-//   let fakeUser = {
-//     email: "fake@gmail.com",
-//     username: "fakeuser"
-//   };
-//   let registeredFakeUser = await User.register(fakeUser, "fakepassword"); // Registers a fake user
-//   res.send(registeredFakeUser); // Sends the registered user data as the response
-// });
+
 
 // Router configuration
 app.use("/listings", listingRouter);                    // Adds routes for listings
